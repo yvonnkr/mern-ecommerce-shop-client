@@ -1,11 +1,8 @@
 import React from "react";
+import Routes from "./Routes";
 
 const App = () => {
-  return (
-    <div>
-      <h1>Ecom-Shop App</h1>
-    </div>
-  );
+  return <Routes />;
 };
 
 export default App;
