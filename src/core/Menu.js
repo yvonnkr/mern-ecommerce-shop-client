@@ -15,7 +15,7 @@ const Menu = () => {
 
   return (
     <div>
-      <ul className="nav nav-tabs bg-primary">
+      <ul className="nav nav-tabs bg-info">
         <li className="nav-item">
           <Link className="nav-link" to="/" style={isActive(history, "/")}>
             Home
