@@ -4,7 +4,7 @@ import { signout, isAuthenticated } from "../auth";
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
-    return { color: "#ff9900" };
+    return { color: "#2c2b2a" };
   } else {
     return { color: "#ffffff" };
   }
@@ -19,6 +19,16 @@ const Menu = () => {
         <li className="nav-item">
           <Link className="nav-link" to="/" style={isActive(history, "/")}>
             Home
+          </Link>
+        </li>
+
+        <li className="nav-item">
+          <Link
+            className="nav-link"
+            style={isActive(history, "/shop")}
+            to="/shop"
+          >
+            Shop
           </Link>
         </li>
 
