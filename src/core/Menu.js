@@ -4,7 +4,8 @@ import { signout, isAuthenticated } from "../auth";
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
-    return { color: "#2c2b2a" };
+    // return { color: "#2c2b2a" };
+    return { color: "darkgrey" };
   } else {
     return { color: "#ffffff" };
   }

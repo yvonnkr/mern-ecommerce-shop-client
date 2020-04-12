@@ -100,7 +100,7 @@ const Shop = () => {
       className="container-fluid"
     >
       <div className="row">
-        <div className="col-3">
+        <div className="col-sm-3">
           <h4>Filter by categories</h4>
           <ul>
             <Checkbox
@@ -117,15 +117,21 @@ const Shop = () => {
           </div>
         </div>
 
-        <div className="col-9">
+        <div className="col-sm-9">
           <h2 className="mb-4">Products</h2>
-          <div className="row">
-            {filteredResults.map((product, i) => (
-              <div key={i} className="col-4 mb-3">
-                <Card product={product} />
-              </div>
-            ))}
-          </div>
+
+          {filteredResults.length === 0 ? (
+            <h3>No products found matching your search criteria</h3>
+          ) : (
+            <div className="row">
+              {filteredResults.map((product, i) => (
+                <div key={i} className="col-sm-4 mb-3">
+                  <Card product={product} />
+                </div>
+              ))}
+            </div>
+          )}
+
           <hr />
           {loadMoreButton()}
         </div>

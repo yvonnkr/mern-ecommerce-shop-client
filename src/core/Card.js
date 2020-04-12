@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import moment from "moment";
+
 import ShowImage from "./ShowImage";
 
 const Card = ({
@@ -32,9 +34,19 @@ const Card = ({
     );
   };
 
+  const showStock = (quantity) => {
+    return quantity > 0 ? (
+      <span className="badge badge-primary badge-pill main-bg">In Stock </span>
+    ) : (
+      <span className="badge badge-primary badge-pill main-bg">
+        Out of Stock{" "}
+      </span>
+    );
+  };
+
   return (
     <div className="card ">
-      <div className="card-header card-header-1 ">{product.name}</div>
+      <div className="card-header card-header-1 name ">{product.name}</div>
       <div className="card-body">
         <ShowImage item={product} url="product" />
         <p className="card-p  mt-2">{product.description.substring(0, 100)}</p>
@@ -42,8 +54,12 @@ const Card = ({
         <p className="black-9">
           Category: {product.category && product.category.name}
         </p>
-
+        <p className="black-8">
+          Added on {moment(product.createdAt).fromNow()}
+        </p>
+        {showStock(product.quantity)}
         <br />
+
         {showViewButton(showViewProductButton)}
 
         {showAddToCartBtn(showAddToCartButton)}
