@@ -1,11 +1,12 @@
 import React, { Fragment } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { signout, isAuthenticated } from "../auth";
+import { itemTotal } from "./cartHelpers";
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
     // return { color: "#2c2b2a" };
-    return { color: "darkgrey" };
+    return { color: "orange" };
   } else {
     return { color: "#ffffff" };
   }
@@ -30,6 +31,19 @@ const Menu = () => {
             to="/shop"
           >
             Shop
+          </Link>
+        </li>
+
+        <li className="nav-item">
+          <Link
+            className="nav-link"
+            style={isActive(history, "/cart")}
+            to="/cart"
+          >
+            Cart{" "}
+            <sup>
+              <small className="cart-badge">{itemTotal()}</small>
+            </sup>
           </Link>
         </li>
 

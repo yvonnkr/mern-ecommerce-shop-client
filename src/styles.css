@@ -16,7 +16,7 @@
     padding: 2px;
     font-size: 12px;
     font-style: italic;
-    background: #000;
+    background: rgb(51, 50, 50);
 }
 
 /**
@@ -79,7 +79,7 @@
  */
 
 .jumbotron {
-    height: 180px;
+    height: 160px;
     color: #fff;
     /* background: linear-gradient(-45deg, #18636e, #1ca3b8, #1da3b8, #1fb1c7); */
     /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
