@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import moment from "moment";
 
 import ShowImage from "./ShowImage";
-import { addItem , updateItem, removeItem } from "./cartHelpers";
+import { addItem, updateItem, removeItem } from "./cartHelpers";
 
 const Card = ({
   product,
@@ -40,7 +40,7 @@ const Card = ({
   };
 
   const addToCart = () => {
-    console.log("added");
+    // console.log("added");
     addItem(product, setRedirect(true));
   };
 
@@ -91,21 +91,21 @@ const Card = ({
     );
   };
 
-   const showRemoveButton = (showRemoveProductButton) => {
-     return (
-       showRemoveProductButton && (
-         <button
-           onClick={() => {
-             removeItem(product._id);
-             setRun(!run); // run useEffect in parent Cart
-           }}
-           className="btn btn-outline-danger mt-2 mb-2"
-         >
-           Remove Product
-         </button>
-       )
-     );
-   };
+  const showRemoveButton = (showRemoveProductButton) => {
+    return (
+      showRemoveProductButton && (
+        <button
+          onClick={() => {
+            removeItem(product._id);
+            setRun(!run); // run useEffect in parent Cart
+          }}
+          className="btn btn-outline-danger mt-2 mb-2"
+        >
+          Remove Product
+        </button>
+      )
+    );
+  };
 
   return (
     <div className="card ">
