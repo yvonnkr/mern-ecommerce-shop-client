@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import DropIn from "braintree-web-drop-in-react";
 
 import { isAuthenticated } from "./../auth/index";
-import { getBraintreeClientToken, processPayment } from "./apiCore";
+import {
+  getBraintreeClientToken,
+  processPayment,
+  createOrder,
+} from "./apiCore";
 import { emptyCart } from "./cartHelpers";
 
 const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
@@ -56,14 +60,13 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
     );
   };
 
-  //  let deliveryAddress = data.address;
+  let deliveryAddress = data.address;
 
   const buy = () => {
     setData({ loading: true });
 
     // send the nonce to your server (nonce is the payment method) -- nonce = data.instance.requestPaymentMethod()
     let nonce;
-
     data.instance
       .requestPaymentMethod()
       .then((data) => {
@@ -82,13 +85,23 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
               success: response.success,
             });
 
-            emptyCart(() => {
-              setRun(!run);
-              console.log("payment success and empty cart");
-              // setData({ loading: false });
-            });
+            // create order then empty cart
+            const createOrderData = {
+              products: products,
+              transaction_id: response.transaction.id,
+              amount: response.transaction.amount,
+              address: deliveryAddress,
+            };
 
-            // create order
+            createOrder(userId, token, createOrderData).then((response) => {
+              emptyCart(() => {
+                setRun(!run); // run useEffect in parent Cart
+                setData({
+                  loading: false,
+                  success: true,
+                });
+              });
+            });
           })
           .catch((error) => {
             console.log(error);
@@ -129,7 +142,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
             }}
             onInstance={(instance) => (data.instance = instance)}
           />
-          <button onClick={buy} className="btn btn-success btn-block">
+          <button onClick={buy} className="btn btn-success btn-block mb-3">
             Pay
           </button>
         </div>
